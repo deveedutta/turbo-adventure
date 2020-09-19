@@ -19,6 +19,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ScannerComponent } from './scanner/scanner.component';
+import { CartComponent } from './cart/cart.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { ScannerComponent } from './scanner/scanner.component';
     NavbarComponent,
     RocketComponent,
     FooterComponent,
-    ScannerComponent
+    ScannerComponent,
+    CartComponent,
+    InvoiceComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

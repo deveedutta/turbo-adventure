@@ -1,1 +1,23 @@
-<p>scanner works!</p>
+<h1>Scanner works!</h1>
+
+<div>
+    <code
+      #list
+      id="stateValue"
+      data-category="foo"
+      [attr.data-catalog-id]="catId"
+      [attr.data-name]="name">
+      Data Map
+    </code>
+    <br />
+    <label>click button to start</label>
+    <br />
+    <button #btn (click)="setState(list.dataset.catalogId, list.dataset.name)">
+        {{list.getAttribute('data-category') || ""}}
+    </button>
+
+    <br />
+    <button #btn2 (click)="startScanner()">Start Scanner</button>
+    <button #btn2 (click)="decodeSingle()">Decode Single</button>
+    <br />
+</div>
