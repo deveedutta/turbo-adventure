@@ -1,4 +1,13 @@
 # Helloworld2
+## Special credits
+---------------------------------------------------------------------------
+|                                                                         |
+| https://github.com/bitoverflow-in/snake-oil-product-page/               |
+| https://github.com/sparksuite/simple-html-invoice-template/             |
+|                                                                         |
+---------------------------------------------------------------------------
+
+###
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
 
