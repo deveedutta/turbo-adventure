@@ -1,0 +1,43 @@
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+
+    .dropdown-item {
+      font-size: 14px;
+    }
+
+    .dropdown-divider + .dropdown-item {
+      background: #eee;
+    }
+
+    .nav-link,
+    .nav-link:focus,
+    .nav-link:hover {
+      color: #fff;
+    }
+}
+
+.toolbar img {
+  
+}
+
+.toolbar #twitter-logo {
+  height: 40px;
+  margin: 0 16px;
+}
+
+.toolbar #twitter-logo:hover {
+  opacity: 0.8;
+}
+
+.foo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+}

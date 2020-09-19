@@ -1,0 +1,256 @@
+<div class="walking-calorie-calculator">
+  <div class="container-fluid">
+    <div class="jumbotron 1-jumbotron-fluid">
+      <h1 class="">Walking Calorie Calculator</h1>
+      <p class="">Calculates the exercise mets and calories burned  by walking.</p>
+    
+      <form #walkingCalorieCalculator="ngForm" (ngSubmit)="onSubmit(walkingCalorieCalculator)">
+        <p><code>{{ walkingCalorieCalculator.value | json }}</code></p>
+        <hr />
+        <p><code>{{ walkingCalorieCalculatorModel | json }}</code></p>
+
+        <div class="form-group form-row">
+          <label class="form-check-label col" for="unit">Unit</label>
+          <div class="col">
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="walkingCalorieCalculatorModel.unit" class="form-check-input" type="radio" name="unit" id="unit" value="SI" required #unit="ngModel" [class.is-invalid]="unit.invalid">
+              <label class="form-check-label" for="unit">SI (m / cm / kg)</label>
+              <small class="text-danger"></small>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="unit" id="unit" value="IMPERIAL" disabled>
+              <label class="form-check-label" for="unit">Imperial (ft / inches / lbs)</label>
+            </div>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="age">Age (in years)</label>
+            <input [(ngModel)]="walkingCalorieCalculatorModel.age" type="number" name="age" id="age" autocomplete="on" class="form-control" required #age="ngModel" [class.is-invalid]="age.invalid" pattern="^[1-9]{1}[0-9]{1}$">
+            <small class="text-danger" *ngIf="age.invalid">Age is required and should be between 10-99</small>
+          </div>
+          <div class="form-group col">
+            <label for="height">Height ({{'in cm'}})</label>
+            <input [(ngModel)]="walkingCalorieCalculatorModel.height"  type="number" name="height" id="height" autocomplete="on" class="form-control" required #height="ngModel" [class.is-invalid]="height.invalid" pattern="^[1-2]{1}[0-9]{2}$">
+            <small class="text-danger" *ngIf="height.invalid">Height is required and should be between 100-299</small>
+          </div>
+          <div class="col-sm-7"></div>
+        </div>
+        <div class="form-group form-row">
+          <label class="form-check-label col-sm-2" for="">Sex (biological)</label>
+          <div class="col-sm-1">
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="walkingCalorieCalculatorModel.sex"  class="form-check-input" type="radio" name="sex" id="sex" value="Female" required #sex="ngModel" [class.is-invalid]="sex.invalid">
+              <label class="form-check-label" for="sex">Female</label>
+            </div>
+          </div>
+          <div class="col-sm-1">
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="walkingCalorieCalculatorModel.sex"  class="form-check-input" type="radio" name="sex" value="Male" required #sex="ngModel" [class.is-invalid]="sex.invalid">
+              <label class="form-check-label" for="sex">Male</label>
+            </div>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="weight">Weight ({{'in KGs'}})</label>
+            <input [(ngModel)]="walkingCalorieCalculatorModel.weight"  type="number" name="weight" id="weight" value="" size="6" autocomplete="on" class="form-control" required #weight="ngModel" [class.is-invalid]="weight.invalid">
+          </div>
+          <div class="form-group col">
+            <label for="duration">Duration (in minutes)</label>
+            <input [(ngModel)]="walkingCalorieCalculatorModel.duration"  type="number" name="duration" id="duration" value="" size="6" autocomplete="on" class="form-control" required #duration="ngModel" [class.is-invalid]="duration.invalid">
+          </div>
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+        <div class="form-group">
+          <label for="walkingSpeed">Walking speed</label>
+          <select [(ngModel)]="walkingCalorieCalculatorModel.walkingSpeed" name="walkingSpeed" id="walkingSpeed" class="form-control" required #walkingSpeed="ngModel" [class.is-invalid]="walkingSpeed.invalid">
+            <option value="1" selected="">less than 2.0mph (3.2km/h)</option>
+            <option value="2">2.0mph (3.2km/h)</option>
+            <option value="3">2.5mph (4.0km/h)</option>
+            <option value="4">3.0mph (4.8km/h)</option>
+            <option value="5">3.5mph (5.6km/h)</option>
+            <option value="6">4.0mph (6.4km/h)</option>
+            <option value="7">4.5mph (7.2km/h)</option>
+            <option value="8">5.0mph (8.0km/h)</option>
+          </select>
+        </div>
+         <div class="form-group">
+          <label for="speed">Mets/h</label>
+          <input [(ngModel)]="walkingCalorieCalculatorModel.speed" type="number" name="speed" id="speed" value="2.0" size="6" autocomplete="on" class="form-control" required #speed="ngModel" [class.is-invalid]="speed.invalid">
+        </div>
+        
+        <div class="form-group">
+          <input type="submit" class="btn btn-primary" value="Submit" [disabled]="!walkingCalorieCalculator.form.valid">
+          <input type="reset" class="btn btn-default" value="Clear">
+          <input type="button" class="btn btn-secondary" value="Save">
+        </div>
+        <div class="form-group">
+          
+        </div>
+      </form>
+    </div>
+    <hr />
+
+    <div class="container">
+      <h2 class="">Output</h2>
+      <div class="form-group">
+        <label for="bmr">BMR</label>
+        <input type="text" name="bmr" id="bmr" value="" autocomplete="on" class="form-control">
+        <small>kcal/day</small>
+      </div>
+      <div class="form-group">
+        <label for="exercise">Exercise</label>
+        <input type="text" name="exercise" id="exercise" value="" size="6" autocomplete="on" class="form-control">
+        <small>kcal/day</small>
+      </div>
+      <div class="form-group form-row">
+        <label for="height">Walking distance</label>
+        <div class="col">
+          <input type="text" name="height" id="height" value="" size="6" autocomplete="on" class="form-control">
+          <small>km/day</small>
+        </div>
+        <div class="col-sm-1">
+          <span>OR</span>
+        </div>
+        <div class="col">
+         <input type="text" name="height" id="height" value="" size="6" autocomplete="on" class="form-control">
+         <small>mile/day</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="duration">Duration (in minutes)</label>
+        <input type="text" name="duration" id="duration" value="" size="6" autocomplete="on" class="form-control">
+        <small>kcal/day</small>
+      </div>
+      <div class="form-group">
+        <label for="duration">Duration (in minutes)</label>
+        <input type="text" name="duration" id="duration" value="" size="6" autocomplete="on" class="form-control">
+        <small>kcal/day</small>
+      </div>
+      <hr />
+      <div class="alert alert-warning" role="alert">
+        <h4 class="alert-warning">Disclaimer:</h4>
+        <p>This site shall not be liable for any damages arising out of the use of any tools in it including the one in this page.</p>
+        <hr>
+        <p class="mb-0">
+        </p>
+        <ol>
+          <li>The <strong>METS</strong> values are provided by <strong>"The Compendium of Physical Activities 2011".</strong>
+        </li>
+        <li> <code>Calorie(Kcal) ＝ BMR x METS / 24 x hour </code>
+        </li>
+          <li>Excess calorie (Average): <code>[calorie intake] − [calorie burned] ≒ 300kcal/day</code></li>
+          <li>Walking 10,000 steps a day will burn about 300 Kcal.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>Definitions</h3>
+    <ol class="list-group">
+      <li class="list-group-item">
+        <h4>Basal Metabolic Rate</h4>
+        <p>Basal metabolic rate is the amount of energy per unit of time that a person needs to keep the body functioning at rest. Some of those processes are breathing, blood circulation, controlling body temperature, cell growth, brain and nerve function, and contraction of muscles.</p>
+        <small>In simpler terms: The rate at which the body uses energy while at rest to maintain vital functions such as breathing and keeping warm.</small>
+      </li>
+      <li class="list-group-item">
+        <h4>What is a normal basal metabolic rate?</h4>
+        <ul>
+          <li> An average man has a BMR of around 7,100 kJ per day, while an average woman has a BMR of around 5,900 kJ per day. Energy expenditure is continuous, but the rate varies throughout the day. The rate of energy expenditure is usually lowest in the early morning.</li>
+        </ul>
+      </li>
+      <li class="list-group-item">
+        <h4>How do you use your BMR to lose weight?</h4>
+        <ul>
+          <li>Your Basal Metabolic Rate (BMR) is the number of calories you burn at rest. The safest way to handle a caloric reduction for fat loss is to reduce your intake by something marginal and being consistent. To optimize your BMR for lean body mass gain, you need to exceed the number of calories you require each day</li>
+        </ul>
+      </li>
+      <li class="list-group-item">
+        <h4>How many kcal are in a kJ?</h4>
+        <ul>
+          <li>
+            1 Calorie equals 4.186 kilojoules (4.2 or simply 4 is close enough for a quick conversion).
+          </li>
+          <li>For example, a slice of bread supplies 290 kilojoules or (290 divided by 4) 70 Calories. Kilojoules are difficult to grasp if you don't have a feel for the numbers.</li>
+          <li>The calorie content is often given in kcals, which is short for kilocalories, and also in kJ, which is short for kilojoules. </li>
+          
+        </ul>
+      </li>
+      <li class="list-group-item">
+        <h4>What is the BMR formula?</h4>
+        <p>
+          There are 2 formulae used to calculate BMR, in [kcal / 24hrs] for men and women respectively:
+          <p><code>BMR for Men = 66.47 + (13.75 * weight [kg]) + (5.003 * size [cm]) − (6.755 * age [years])</code></p>
+          <p><code>BMR for Women = 655.1 + (9.563 * weight [kg]) + (1.85 * size [cm]) − (4.676 * age [years])</code></p>
+      </li>
+      <li class="list-group-item">
+        <h4>Difference between Calorie and Kilo Calorie?</h4>
+        <ul>
+          <li>A kilocalorie is another word for what's commonly called a calorie.</li>
+          <li>So, 1,000 calories will be written as 1,000kcals.</li>
+          <li>A caloie <em>small calorie or gram calorie (usually denoted cal)</em> is the amount of heat energy needed to raise the temperature of one gram of water by one degree Celsius (or one kelvin). </li>
+          <li>The large calorie, food calorie, or kilocalorie (Cal, calorie or kcal) is the amount of heat needed to cause the same increase in one kilogram of water. Thus, 1 kilocalorie (kcal) = 1000 calories (cal).</li>
+        </ul>
+      </li>
+    </ol>
+
+
+    <hr />
+    <div class="row">
+      <div class="col-4">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+          <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+          <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">...</div>
+          <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+          <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+          <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+        </div>
+      </div>
+    </div>
+
+    Basal Metabolic Rate
+
+    What affects my BMR?
+
+    Anything that results in an increase to your metabolic rate will increase your BMR. This includes exercise, stress, fear and illnesses.
+
+    Your BMR is relative to body mass, age, weight and height. It is also affected by your gender; as it widely regarded that men need more calories than women.
+
+    <table id="rlink" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <td class="caption">Related links</td>
+        </tr>
+        <tr>
+          <td class="body"><a href="https://sites.google.com/site/compendiumofphysicalactivities/Activity-Categories/walking" target="_blank">The Compendium of Physical Activities</a></td>
+        </tr>
+        <tr>
+          <td class="body"><a href="/exec/system/1350959101" target="_blank">Running Calorie Calculator</a></td>
+        </tr>
+        <tr>
+          <td class="body"><a href="/exec/system/1350958587" target="_blank">Bicycling Calorie Calculator</a></td>
+        </tr>
+        <tr>
+          <td class="body"><a href="/exec/system/1500880113" target="_blank">Swimming Calorie Calculator</a></td>
+        </tr>
+        <tr>
+          <td class="body"><a href="/exec/system/1500877398" target="_blank">Sports Calorie Calculator</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
