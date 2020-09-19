@@ -11,8 +11,10 @@
     </code>
 
     <br />
+    <video #video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+    <br />
     <!--  -->
-    <img class="post-body" width="200" src="https://cdn.britannica.com/57/43857-050-9250A718/bar-code.jpg">
+    <img #img class="post-body" width="200" src="https://cdn.britannica.com/57/43857-050-9250A718/bar-code.jpg">
     <!-- <img src="bar-code.1.jpg"> -->
     <br />
     <label #label>click button to start</label>
@@ -20,9 +22,21 @@
   
 
     <br />
-    <button #btn2 (click)="startScanner()">Start Scanner</button>
-    <button #btn2 (click)="decodeSingle()">Decode Single</button>
+    <button #btn2 (click)="decodeFromCamera()">Decode from Camera</button>
+    <button #btn2 (click)="decodeFromImage()">Decode From Image</button>
     <br />
+    <label #result>{{result}}</label>
+    <br />
+    <br />
+    <ul>
+      <li>https://amp.barcodespider.com/images/ean-barcode-13-digit.jpg</li>
+      <li>https://www.product-label.nl/wp-content/uploads/2019/01/EAN-13-Barcode-GS1-Hoop-Bier.jpg</li>
+      <li>https://storage.googleapis.com/cs-unplugged.appspot.com/static/img/topics/barcode-12.jpg</li>
+      <li>https://storage.googleapis.com/cs-unplugged.appspot.com/static/img/topics/barcode-12.jpg</li>
+      <li>https://oddrandomthoughts.com/wp-content/uploads/2012/12/IMG_0183-1024x847.jpg</li>
+      <li>https://conroy.org/images/gtin.jpg</li>
+      <li>aaaaa</li>
+    </ul>
     <br />
     <br />
     <br />
