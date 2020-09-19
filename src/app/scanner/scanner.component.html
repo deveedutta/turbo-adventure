@@ -1,6 +1,6 @@
 <h1>Scanner works!</h1>
 
-<div>
+<div #wrapper>
     <code
       #list
       id="stateValue"
@@ -9,15 +9,25 @@
       [attr.data-name]="name">
       Data Map
     </code>
+
     <br />
-    <label>click button to start</label>
+    <!--  -->
+    <img class="post-body" width="200" src="https://cdn.britannica.com/57/43857-050-9250A718/bar-code.jpg">
+    <!-- <img src="bar-code.1.jpg"> -->
     <br />
-    <button #btn (click)="setState(list.dataset.catalogId, list.dataset.name)">
-        {{list.getAttribute('data-category') || ""}}
-    </button>
+    <label #label>click button to start</label>
+    <br />
+  
 
     <br />
     <button #btn2 (click)="startScanner()">Start Scanner</button>
     <button #btn2 (click)="decodeSingle()">Decode Single</button>
     <br />
+    <br />
+    <br />
+    <br />
+    <br />
+      <button #btn (click)="setState(list.dataset.catalogId, list.dataset.name)">
+        Random test::   {{list.getAttribute('data-category') || ""}}
+    </button>
 </div>

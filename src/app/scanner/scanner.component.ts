@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
+import { BrowserQRCodeReader } from '@zxing/library';
 
 declare var Quagga: any;
+const codeReader = new BrowserQRCodeReader();
 
 
 @Component({
@@ -17,52 +19,32 @@ export class ScannerComponent implements OnInit {
   state: any;
   confirmation: string = "";
 
-  // experimenting
+  // ignore
   catId: string = "";
   name: string = "";
   foo: string = "";
 
+  @ViewChild('wrapper', { read: ElementRef }) wrapper: ElementRef;
+  @ViewChild('label', { read: ElementRef }) label: ElementRef;
+  @ViewChild('img', { read: ElementRef }) img: ElementRef;
 
   constructor() { }
 
   ngOnInit(): void {
-
     this.state = {};
     this.scanner = Quagga;
-    Quagga.init(this.state, function(err) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      this.attachListeners();
-      this.checkCapabilities();
-      Quagga.start();
-    });
-
   }
 
+  ngAfterViewInit(): void {
+    let images = this.wrapper.nativeElement.querySelector('img','.post-body');
+    console.log(this.wrapper.nativeElement);
+    console.log(this.label.nativeElement.textContent);
+    console.log(images);
+  }
+  
+  // just placeholders for now
   startScanner(): void {}
-  initCameraSelection(): void {}
-  checkCapabilities(): void {}
-  onReaderConfigChage(): void {}
-
-
-  attachListeners(): void {
-    this.initCameraSelection();
-    // var $target = $(e.target),
-    // value = checked;
-    // this.setState(state, value);
-
-    if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
-      // safely access `navigator.mediaDevices.getUserMedia`
-    }
-  }
-
-  onStopButtonClick(): void {
-    Quagga.stop();
-  }
-
-
+  decodeSingle(): void {}
   setState(catalogId: string, name: string): void {
     this.confirmation = `state:: ${catalogId} in ${name}.`;
     this.state = {
@@ -71,22 +53,6 @@ export class ScannerComponent implements OnInit {
     };
   }
 
-
-  decodeSingle(): void {
-    Quagga.decodeSingle({
-        decoder: {
-            readers: ["code_128_reader"] // List of active readers
-        },
-        locate: true, // try to locate the barcode in the image
-        src: '/test/fixtures/code_128/image-001.jpg' // or 'data:image/jpg;base64,' + data
-    }, (result) => {
-        if(result.codeResult) {
-            console.log("result", result.codeResult.code);
-        } else {
-            console.log("not detected");
-        }
-    });
-  }
 
 
 

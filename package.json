@@ -40,6 +40,7 @@
     "@angular/platform-browser-dynamic": "~10.0.14",
     "@angular/router": "~10.0.14",
     "@angular/service-worker": "~10.0.14",
+    "@zxing/library": "^0.17.1",
     "bootstrap": "^4.5.2",
     "bootstrap-icons": "^1.0.0",
     "jquery": "^3.5.1",
